@@ -61,7 +61,6 @@ class SinglyLinkedList {
       this.head = null;
     }
     this.decreaseLength();
-    console.log(this);
     return currentHead;
   }
 
@@ -79,20 +78,19 @@ class SinglyLinkedList {
   public get(index): Node {
     if (index < 0 || index >= this.length) { return null; }
     if (index === 0) { return this.head; }
-    let node = null;
+    let currentNode = this.head;
     for (let i = 1; i <= index; i++) {
-      node = this.head.next;
+      currentNode = currentNode.next;
     }
 
-    console.log(node);
-    return node;
+    return currentNode;
   }
 
   public set(index: number, value: any): boolean {
     const node = this.get(index);
     if (!node) { return false; }
     node.value = value;
-    console.log(this, node);
+    this.length$.next(this.length);
     return true;
   }
 
@@ -102,7 +100,7 @@ class SinglyLinkedList {
     const newNode = new Node(value);
     newNode.next = currentNode.next;
     currentNode.next = newNode;
-    console.log(this);
+    this.increaseLength();
     return true;
   }
 
