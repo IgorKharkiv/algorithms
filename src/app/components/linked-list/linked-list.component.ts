@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Observable, from, BehaviorSubject } from 'rxjs';
 
 class Node {
   public value: any;
@@ -10,8 +11,13 @@ class Node {
 
 class SinglyLinkedList {
   public length = 0;
+  public length$: BehaviorSubject<number> = new BehaviorSubject(this.length);
   public head: Node = null;
   public tail: Node = null;
+
+  constructor() {
+    this.length$.subscribe(() => console.log(this));
+  }
 
   public push(value: any): void {
     const newNode = new Node(value);
@@ -23,9 +29,7 @@ class SinglyLinkedList {
       currentTailNode.next = newNode;
       this.tail = newNode;
     }
-    this.length++;
-
-    console.log(this);
+    this.increaseLength();
   }
 
   public pop(): Node {
@@ -44,8 +48,7 @@ class SinglyLinkedList {
       this.tail = null;
     }
 
-    this.length--;
-    console.log(this);
+    this.decreaseLength();
     return currentTail;
   }
 
@@ -57,7 +60,7 @@ class SinglyLinkedList {
     } else {
       this.head = null;
     }
-    this.length--;
+    this.decreaseLength();
     console.log(this);
     return currentHead;
   }
@@ -69,8 +72,7 @@ class SinglyLinkedList {
     if (!this.length) {
       this.tail = newNode;
     }
-    this.length++;
-    console.log(this);
+    this.increaseLength();
     return newNode;
   }
 
@@ -86,12 +88,22 @@ class SinglyLinkedList {
     return node;
   }
 
-  public set(index: number, value: any): Node {
+  public set(index: number, value: any): boolean {
     const node = this.get(index);
-    if (!node) { return null; }
+    if (!node) { return false; }
     node.value = value;
     console.log(this, node);
-    return node;
+    return true;
+  }
+
+  public insert(index: number, value: any): boolean {
+    const currentNode = this.get(index);
+    if (!currentNode) { return false; }
+    const newNode = new Node(value);
+    newNode.next = currentNode.next;
+    currentNode.next = newNode;
+    console.log(this);
+    return true;
   }
 
   public traverse(): Node {
@@ -101,6 +113,16 @@ class SinglyLinkedList {
     }
     console.log(current);
     return current;
+  }
+
+  private increaseLength(): void {
+    this.length++;
+    this.length$.next(this.length);
+  }
+
+  private decreaseLength(): void {
+    this.length--;
+    this.length$.next(this.length);
   }
 }
 
@@ -113,10 +135,14 @@ export class LinkedListComponent implements OnInit {
   @ViewChild('indexInput', null) nameInput: ElementRef;
   @ViewChild('valueInput', null) valueInput: ElementRef;
   public singlyLinkedList: SinglyLinkedList;
+  public itemsLength$: Observable<number>;
+  public itemsArr: Node[] = [];
+
   constructor() { }
 
   ngOnInit() {
     this.singlyLinkedList = new SinglyLinkedList();
+    this.singlyLinkedList.length$.subscribe(() => this.render());
   }
 
   public push(): void {
@@ -140,10 +166,28 @@ export class LinkedListComponent implements OnInit {
     return this.singlyLinkedList.get(index);
   }
 
-  public set(): Node {
+  public set(): boolean {
     const index = Number(this.nameInput.nativeElement.value);
     const value = this.valueInput.nativeElement.value;
     return this.singlyLinkedList.set(index, value);
+  }
+
+  public insert(): boolean {
+    const index = Number(this.nameInput.nativeElement.value);
+    const value = this.valueInput.nativeElement.value;
+    return this.singlyLinkedList.insert(index, value);
+  }
+
+  private render(): void {
+    this.itemsArr = [];
+    if (this.singlyLinkedList.length < 1) { return; }
+    let node = this.singlyLinkedList.head;
+    this.itemsArr.push(node);
+    while (node.next) {
+      node = node.next;
+      this.itemsArr.push(node);
+    }
+    console.log(this.itemsArr);
   }
 
   private getValue(): number {
