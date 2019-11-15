@@ -1,1 +1,23 @@
-<p>doubly-linked-list works!</p>
+<p>linked-list works!</p>
+<button (click)="push()">Push New Node</button>
+<button (click)="pop()">Pop</button>
+<button (click)="shift()">Shift</button>
+<button (click)="unshift()">Unshift</button>
+<input type="number" #indexInput>
+<input type="text" #valueInput>
+<button (click)="get()">Get</button>
+<button (click)="set()">Set</button>
+<button (click)="insert()">Insert</button>
+<button (click)="remove()">Remove</button>
+<button (click)="reverse()">Reverse</button>
+
+<button (click)="singlyLinkedList.traverse()">Get Penult</button>
+<div class="container">
+  <ng-container *ngFor="let item of itemsArr">
+    <div class="item-wrapper"></div>
+    <span class="item">
+      {{ item.value }}
+    </span>
+    <span class="arrow double"></span>
+  </ng-container>
+</div>
