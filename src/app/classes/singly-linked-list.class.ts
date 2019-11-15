@@ -18,7 +18,7 @@ export class SinglyLinkedList {
     this.length$.subscribe(() => console.log(this));
   }
 
-  public push(value: any): void {
+  public push(value: any): number {
     const newNode = new SinglyLinkedListNode(value);
     const currentTailNode = this.tail;
     if (!currentTailNode) {
@@ -29,6 +29,7 @@ export class SinglyLinkedList {
       this.tail = newNode;
     }
     this.increaseLength();
+    return this.length - 1;
   }
 
   public pop(): SinglyLinkedListNode {
@@ -87,9 +88,9 @@ export class SinglyLinkedList {
   }
 
   public set(index: number, value: any): boolean {
-    const SinglyLinkedListNode = this.get(index);
+    const singlyLinkedListNode = this.get(index);
     if (!SinglyLinkedListNode) { return false; }
-    SinglyLinkedListNode.value = value;
+    singlyLinkedListNode.value = value;
     this.length$.next(this.length);
     return true;
   }

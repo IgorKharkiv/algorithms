@@ -1,1 +1,14 @@
-<p>stack works!</p>
+<p>Stack</p>
+<button (click)="push()">Push</button>
+<button (click)="pop()">Pop</button>
+
+<button (click)="singlyLinkedList.traverse()">Get Penult</button>
+<div class="container">
+  <ng-container *ngFor="let item of itemsArr">
+    <div class="item-wrapper"></div>
+    <span class="item">
+      {{ item.value }}
+    </span>
+    <span class="arrow"></span>
+  </ng-container>
+</div>
