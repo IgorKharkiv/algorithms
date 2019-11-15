@@ -77,38 +77,38 @@ export class DoublyLinkedList {
     if (!this.length || index >= this.length || index < 0 ) { return null; }
 
     const reverse = index > this.length / 2;
-    let DoublyLinkedListNode = this.head;
+    let node = this.head;
     let link = 'next';
 
     if (reverse) {
       link = 'prev';
-      DoublyLinkedListNode = this.tail;
+      node = this.tail;
       index = this.length - index - 1;
     }
 
     while (index) {
-      DoublyLinkedListNode = DoublyLinkedListNode[link];
+      node = node[link];
       index--;
     }
 
-    return DoublyLinkedListNode;
+    return node;
   }
 
   public set(index: number, value: any): boolean {
-    const DoublyLinkedListNode = this.get(index);
+    const node = this.get(index);
     if (!DoublyLinkedListNode) { return false; }
-    DoublyLinkedListNode.value = value;
+    node.value = value;
     this.length$.next(this.length);
     return true;
   }
 
   public insert(index: number, value: any): boolean {
-    const DoublyLinkedListNode = this.get(index);
+    const node = this.get(index);
     if (!DoublyLinkedListNode) { return false; }
     const newNode = new DoublyLinkedListNode(value);
-    newNode.next = DoublyLinkedListNode.next;
-    newNode.prev = DoublyLinkedListNode;
-    DoublyLinkedListNode.next = newNode;
+    newNode.next = node.next;
+    newNode.prev = node;
+    node.next = newNode;
     this.increaseLength();
     return true;
   }
