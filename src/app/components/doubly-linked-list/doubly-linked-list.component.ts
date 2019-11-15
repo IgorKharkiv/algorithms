@@ -61,6 +61,39 @@ class DoublyLinkedList {
     this.decreaseLength();
   }
 
+  public unshift(value: any): void {
+    const newNode = new Node(value);
+    if(!this.length) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.increaseLength();
+  }
+
+  public get(index: number): Node {
+    if (!this.length || index >= this.length ) { return null; }
+
+    const reverse = index >= this.length / 2;
+    let node = this.head;;
+    let link = 'next';
+
+    if (reverse) {
+      link = 'prev';
+      node = this.tail;
+      index = this.length - index - 1
+    }
+
+    while(index) {
+      node = node[link];
+      index--;
+    }
+
+    return node;
+  }
+
   private increaseLength(): void {
     this.length++;
     this.length$.next(this.length);
@@ -91,6 +124,10 @@ export class DoublyLinkedListComponent implements OnInit {
     this.doublyLinkedList.length$.subscribe(() => this.render());
   }
 
+  public unshift() {
+    this.doublyLinkedList.unshift(this.getValue());
+  }
+
   public shift() {
     this.doublyLinkedList.shift();
   }
@@ -101,6 +138,12 @@ export class DoublyLinkedListComponent implements OnInit {
 
   public push(): void {
     this.doublyLinkedList.push(this.getValue())
+  }
+
+  public get(): Node {
+    const node = this.doublyLinkedList.get(this.getValueOfNumberInput());
+    console.log('=== === ===', node);
+    return node;
   }
 
   private render(): void {
@@ -117,5 +160,9 @@ export class DoublyLinkedListComponent implements OnInit {
   
   private getValue(): number {
     return Math.floor(Math.random() * (1000 - 0 + 1)) + 0;
+  }
+
+  private getValueOfNumberInput(): number {
+    return Number(this.nameInput.nativeElement.value);
   }
 }
