@@ -9,6 +9,7 @@ import {
   DoublyLinkedListComponent,
   StackComponent,
   QueueComponent,
+  BinarySearchTreeComponent,
 } from '@components/index';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +24,8 @@ import { AppComponent } from './app.component';
     LinkedListComponent,
     DoublyLinkedListComponent,
     StackComponent,
-    QueueComponent
+    QueueComponent,
+    BinarySearchTreeComponent
   ],
   imports: [
     BrowserModule,

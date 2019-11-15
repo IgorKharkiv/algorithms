@@ -5,3 +5,4 @@ export { LinkedListComponent } from './linked-list/linked-list.component';
 export { DoublyLinkedListComponent } from './doubly-linked-list/doubly-linked-list.component';
 export { StackComponent } from './stack/stack.component';
 export { QueueComponent } from './queue/queue.component';
+export { BinarySearchTreeComponent } from './binary-search-tree/binary-search-tree.component';
