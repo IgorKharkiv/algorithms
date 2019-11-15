@@ -6,6 +6,7 @@ import {
   RecursionsComponentComponent,
   SearchComponent,
   LinkedListComponent,
+  DoublyLinkedListComponent,
 } from '@components/index';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +18,8 @@ import { AppComponent } from './app.component';
     HomeComponentComponent,
     RecursionsComponentComponent,
     SearchComponent,
-    LinkedListComponent
+    LinkedListComponent,
+    DoublyLinkedListComponent
   ],
   imports: [
     BrowserModule,

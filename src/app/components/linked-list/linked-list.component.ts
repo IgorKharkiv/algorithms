@@ -53,12 +53,13 @@ class SinglyLinkedList {
   }
 
   public shift(): Node {
-    if (!this.head) { return null; }
+    if (!this.length) { return null; }
     const currentHead = this.head;
     if (this.length > 1) {
       this.head = currentHead.next;
     } else {
       this.head = null;
+      this.tail = null;
     }
     this.decreaseLength();
     return currentHead;
@@ -102,6 +103,47 @@ class SinglyLinkedList {
     currentNode.next = newNode;
     this.increaseLength();
     return true;
+  }
+
+  public remove(index: number): boolean {
+    if (index > this.length || index < 0) { return false; }
+    if (index === 0) { return !!this.shift(); }
+    if (index === this.length) { return !!this.pop(); }
+    const penult = this.get(index - 1);
+    const removedItem = penult.next;
+    penult.next = removedItem.next;
+    this.decreaseLength();
+    return true;
+  }
+
+  public reverse(): void {
+    if (this.length > 1) {
+      let currentLeft = this.head;
+      let currentRight = currentLeft.next;
+      let nextItem = currentRight.next;
+      let isFirst = true;
+      while (nextItem) {
+        if (isFirst) {
+          currentLeft.next = null;
+          this.tail = currentLeft;
+          isFirst = false;
+        }
+        if (currentRight) {
+          currentRight.next = currentLeft;
+        }
+        currentLeft = currentRight;
+        currentRight = nextItem;
+        if (!nextItem.next) {
+          this.head = nextItem;
+          nextItem.next = currentLeft;
+          nextItem = null;
+          currentRight = null;
+        } else {
+          nextItem = nextItem.next;
+        }
+      }
+      this.length$.next(this.length);
+    }
   }
 
   public traverse(): Node {
@@ -176,6 +218,15 @@ export class LinkedListComponent implements OnInit {
     return this.singlyLinkedList.insert(index, value);
   }
 
+  public remove(): boolean {
+    const index = Number(this.nameInput.nativeElement.value);
+    return this.singlyLinkedList.remove(index);
+  }
+
+  public reverse() {
+    this.singlyLinkedList.reverse();
+  }
+
   private render(): void {
     this.itemsArr = [];
     if (this.singlyLinkedList.length < 1) { return; }
@@ -191,5 +242,4 @@ export class LinkedListComponent implements OnInit {
   private getValue(): number {
     return Math.floor(Math.random() * (1000 - 0 + 1)) + 0;
   }
-
 }
