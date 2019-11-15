@@ -59,11 +59,12 @@ class DoublyLinkedList {
     }
 
     this.decreaseLength();
+    return nodeToRemove;
   }
 
   public unshift(value: any): void {
     const newNode = new Node(value);
-    if(!this.length) {
+    if (!this.length) {
       this.head = newNode;
       this.tail = newNode;
     } else {
@@ -74,24 +75,53 @@ class DoublyLinkedList {
   }
 
   public get(index: number): Node {
-    if (!this.length || index >= this.length ) { return null; }
+    if (!this.length || index >= this.length || index < 0 ) { return null; }
 
-    const reverse = index >= this.length / 2;
-    let node = this.head;;
+    const reverse = index > this.length / 2;
+    let node = this.head;
     let link = 'next';
 
     if (reverse) {
       link = 'prev';
       node = this.tail;
-      index = this.length - index - 1
+      index = this.length - index - 1;
     }
 
-    while(index) {
+    while (index) {
       node = node[link];
       index--;
     }
 
     return node;
+  }
+
+  public set(index: number, value: any): boolean {
+    const node = this.get(index);
+    if (!node) { return false; }
+    node.value = value;
+    this.length$.next(this.length);
+    return true;
+  }
+
+  public insert(index: number, value: any): boolean {
+    const node = this.get(index);
+    if (!node) { return false; }
+    const newNode = new Node(value);
+    newNode.next = node.next;
+    newNode.prev = node;
+    node.next = newNode;
+    this.increaseLength();
+    return true;
+  }
+
+  public remove(index): boolean {
+    if (index === 0) { return !!this.shift(); }
+    if (index === this.length - 1) { return !!this.pop(); }
+    const nodeToRemove = this.get(index);
+    nodeToRemove.prev.next = nodeToRemove.next;
+    nodeToRemove.next.prev = nodeToRemove.prev;
+    this.decreaseLength();
+    return true;
   }
 
   private increaseLength(): void {
@@ -137,13 +167,30 @@ export class DoublyLinkedListComponent implements OnInit {
   }
 
   public push(): void {
-    this.doublyLinkedList.push(this.getValue())
+    this.doublyLinkedList.push(this.getValue());
   }
 
   public get(): Node {
     const node = this.doublyLinkedList.get(this.getValueOfNumberInput());
     console.log('=== === ===', node);
     return node;
+  }
+
+  public set(): boolean {
+    const index = this.getValueOfNumberInput();
+    const value = this.getValueOfTextInput();
+    return this.doublyLinkedList.set(index, value);
+  }
+
+  public insert(): boolean {
+    const index = this.getValueOfNumberInput();
+    const value = this.getValueOfTextInput();
+    return this.doublyLinkedList.insert(index, value);
+  }
+
+  public remove(): boolean {
+    const index = this.getValueOfNumberInput();
+    return this.doublyLinkedList.remove(index);
   }
 
   private render(): void {
@@ -157,12 +204,15 @@ export class DoublyLinkedListComponent implements OnInit {
     }
     console.log(this.itemsArr);
   }
-  
+
   private getValue(): number {
     return Math.floor(Math.random() * (1000 - 0 + 1)) + 0;
   }
 
   private getValueOfNumberInput(): number {
     return Number(this.nameInput.nativeElement.value);
+  }
+  private getValueOfTextInput(): number {
+    return Number(this.valueInput.nativeElement.value);
   }
 }
