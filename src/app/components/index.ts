@@ -4,3 +4,4 @@ export { SearchComponent } from './search/search.component';
 export { LinkedListComponent } from './linked-list/linked-list.component';
 export { DoublyLinkedListComponent } from './doubly-linked-list/doubly-linked-list.component';
 export { StackComponent } from './stack/stack.component';
+export { QueueComponent } from './queue/queue.component';
