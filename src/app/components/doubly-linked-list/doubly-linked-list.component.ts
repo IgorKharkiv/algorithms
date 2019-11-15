@@ -115,11 +115,14 @@ class DoublyLinkedList {
   }
 
   public remove(index): boolean {
+    if (index < 0 || index >= this.length) { return false; }
     if (index === 0) { return !!this.shift(); }
     if (index === this.length - 1) { return !!this.pop(); }
     const nodeToRemove = this.get(index);
     nodeToRemove.prev.next = nodeToRemove.next;
     nodeToRemove.next.prev = nodeToRemove.prev;
+    nodeToRemove.next = null;
+    nodeToRemove.prev = null;
     this.decreaseLength();
     return true;
   }
