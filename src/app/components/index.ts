@@ -6,3 +6,4 @@ export { DoublyLinkedListComponent } from './doubly-linked-list/doubly-linked-li
 export { StackComponent } from './stack/stack.component';
 export { QueueComponent } from './queue/queue.component';
 export { BinarySearchTreeComponent } from './binary-search-tree/binary-search-tree.component';
+export { PriorityQueueComponent } from './priority-queue/priority-queue.component';

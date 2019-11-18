@@ -17,6 +17,7 @@ export class BinarySearchTree {
 
   public insert(value): BSTNode {
     const node = new BSTNode(value);
+
     if (!this.root) {
       this.root = node;
       return node;
@@ -32,7 +33,6 @@ export class BinarySearchTree {
         curNode[direction] = node;
         iterate = false;
       }
-
     }
     console.log(this.root);
     return node;

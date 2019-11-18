@@ -10,6 +10,7 @@ import {
   StackComponent,
   QueueComponent,
   BinarySearchTreeComponent,
+  PriorityQueueComponent,
 } from '@components/index';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +26,8 @@ import { AppComponent } from './app.component';
     DoublyLinkedListComponent,
     StackComponent,
     QueueComponent,
-    BinarySearchTreeComponent
+    BinarySearchTreeComponent,
+    PriorityQueueComponent
   ],
   imports: [
     BrowserModule,
