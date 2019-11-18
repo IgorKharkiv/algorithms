@@ -61,6 +61,13 @@ export class BinarySearchTree {
     return visited;
   }
 
+  public depthFirstPreOrderSearch(root: BSTNode, visited: BSTNode[] = []): BSTNode[] {
+    if (!root) { return visited; }
+    const leftVisited = this.depthFirstPreOrderSearch(root.left, visited);
+    const rightVisited = this.depthFirstPreOrderSearch(root.right, visited);
+    return [root, ...leftVisited, ...rightVisited];
+  }
+
   private getDirection(valA: any, valB: any): DIRECTION_ENUM {
     return valA > valB ? DIRECTION_ENUM.RIGHT : DIRECTION_ENUM.LEFT;
   }

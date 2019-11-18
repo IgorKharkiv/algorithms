@@ -33,6 +33,12 @@ export class BinarySearchTreeComponent implements OnInit {
     return res;
   }
 
+  public depthFirstPreOrderSearch(): BSTNode[] {
+    const res = this.bst.depthFirstPreOrderSearch(this.bst.root);
+    console.log('breadthFirstSearch', res);
+    return res;
+  }
+
   private getValue(): number {
     return Math.floor(Math.random() * (1000 - 0 + 1)) + 0;
   }
