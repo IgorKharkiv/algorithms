@@ -21,4 +21,9 @@ export class PriorityQueueComponent implements OnInit {
     console.log(this.maxBinaryHeap.values);
   }
 
+  public extractMax(): void {
+    this.maxBinaryHeap.extractMax();
+    console.log(this.maxBinaryHeap.values);
+  }
+
 }
