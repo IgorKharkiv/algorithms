@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { MaxBinaryHeap } from '../../classes/index';
+import { MaxBinaryHeap, PriorityQueue } from '../../classes/index';
 
 @Component({
   selector: 'app-priority-queue',
@@ -7,17 +7,20 @@ import { MaxBinaryHeap } from '../../classes/index';
   styleUrls: ['./priority-queue.component.scss']
 })
 export class PriorityQueueComponent implements OnInit {
-  @ViewChild('indexInput', null) nameInput: ElementRef;
+  @ViewChild('priorityInput', null) priorityInput: ElementRef;
   @ViewChild('valueInput', null) valueInput: ElementRef;
   public maxBinaryHeap: MaxBinaryHeap;
+  public priorityQueue: PriorityQueue;
 
   ngOnInit() {
     this.maxBinaryHeap = new MaxBinaryHeap();
+    this.priorityQueue = new PriorityQueue();
   }
 
   public insert(): void {
     const value = Number(this.valueInput.nativeElement.value);
     this.maxBinaryHeap.insert(value);
+    this.valueInput.nativeElement.value = '';
     console.log(this.maxBinaryHeap.values);
   }
 
@@ -26,4 +29,15 @@ export class PriorityQueueComponent implements OnInit {
     console.log(this.maxBinaryHeap.values);
   }
 
+  public enqueue(): void {
+    const value = this.valueInput.nativeElement.value;
+    const priority = Number(this.priorityInput.nativeElement.value);
+    this.priorityQueue.enqueue(value, priority);
+    console.log('enqueue', this.priorityQueue.values);
+  }
+
+  public dequeue(): void {
+    this.priorityQueue.dequeue();
+    console.log('dequeue', this.priorityQueue.values);
+  }
 }
