@@ -15,6 +15,7 @@ import {
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HashTableComponent } from './components/hash-table/hash-table.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AppComponent } from './app.component';
     StackComponent,
     QueueComponent,
     BinarySearchTreeComponent,
-    PriorityQueueComponent
+    PriorityQueueComponent,
+    HashTableComponent
   ],
   imports: [
     BrowserModule,

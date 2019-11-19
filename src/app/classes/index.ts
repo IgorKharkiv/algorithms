@@ -5,3 +5,4 @@ export * from './queue.class';
 export * from './binary-search-tree.class';
 export * from './max-binary-heap.class';
 export * from './priority-queue.class';
+export * from './hash-table.class';
