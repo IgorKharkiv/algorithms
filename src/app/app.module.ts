@@ -11,6 +11,7 @@ import {
   QueueComponent,
   BinarySearchTreeComponent,
   PriorityQueueComponent,
+  GraphComponent,
 } from '@components/index';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +30,8 @@ import { HashTableComponent } from './components/hash-table/hash-table.component
     QueueComponent,
     BinarySearchTreeComponent,
     PriorityQueueComponent,
-    HashTableComponent
+    HashTableComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
