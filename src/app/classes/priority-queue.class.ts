@@ -26,6 +26,8 @@ export class PriorityQueue {
         break;
       }
     }
+
+    return node;
   }
 
   public dequeue(): void {

@@ -1,0 +1,13 @@
+<p>Queue</p>
+<button (click)="push()">Push</button>
+<button (click)="shift()">Shift</button>
+
+<div class="container">
+  <ng-container *ngFor="let item of queue.queue">
+    <div class="item-wrapper"></div>
+    <span class="item">
+      {{ item.value }}
+    </span>
+    <span class="arrow double no-right"></span>
+  </ng-container>
+</div>
