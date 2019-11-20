@@ -41,4 +41,11 @@ export class GraphComponent implements OnInit {
     this.graph.removeVertex(ver);
     console.log(this.graph.adjacencyList);
   }
+
+  public depthFirstSearchRecursive(): string[] {
+    const ver = this.vertexAInput.nativeElement.value;
+    const res = this.graph.depthFirstSearchRecursive(ver);
+    console.log(res);
+    return res;
+  }
 }

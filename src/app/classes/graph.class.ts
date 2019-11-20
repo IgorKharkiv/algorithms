@@ -30,4 +30,23 @@ export class Graph {
       delete this.adjacencyList[vertex];
     }
   }
+
+  public depthFirstSearchRecursive(startingVertex: string): string[] {
+    const res = [];
+    const visitedVertexes = {};
+    this.dfsRecursionHelper(startingVertex, visitedVertexes, res);
+    return res;
+  }
+
+  private dfsRecursionHelper(vertex: string, visitedVertexes: object, res: string[]): void {
+    if (!visitedVertexes[vertex]) {
+      visitedVertexes[vertex] = true;
+      res.push(vertex);
+    } else {
+      return;
+    }
+    this.adjacencyList[vertex].forEach(v => {
+      this.dfsRecursionHelper(v, visitedVertexes, res);
+    });
+  }
 }
