@@ -1,6 +1,8 @@
 export class Graph {
   public adjacencyList: object = {};
   public addVertex(key: string): void {
-    this.adjacencyList[key] = [];
+    if (this.adjacencyList[key] === undefined) {
+      this.adjacencyList[key] = [];
+    }
   }
 }

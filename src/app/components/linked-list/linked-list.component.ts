@@ -8,8 +8,8 @@ import { SinglyLinkedList, SinglyLinkedListNode } from '../../classes/index';
   styleUrls: ['./linked-list.component.scss']
 })
 export class LinkedListComponent implements OnInit {
-  @ViewChild('indexInput', null) nameInput: ElementRef;
-  @ViewChild('valueInput', null) valueInput: ElementRef;
+  @ViewChild('indexInput', null) nameInput: ElementRef<HTMLInputElement>;
+  @ViewChild('valueInput', null) valueInput: ElementRef<HTMLInputElement>;
   public singlyLinkedList: SinglyLinkedList;
   public itemsLength$: Observable<number>;
   public itemsArr: SinglyLinkedListNode[] = [];

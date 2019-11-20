@@ -7,8 +7,8 @@ import { HashTable } from '../../classes/index';
   styleUrls: ['./hash-table.component.scss']
 })
 export class HashTableComponent implements OnInit {
-  @ViewChild('valueInput', null) valueInput: ElementRef;
-  @ViewChild('keyInput', null) keyInput: ElementRef;
+  @ViewChild('valueInput', null) valueInput: ElementRef<HTMLInputElement>;
+  @ViewChild('keyInput', null) keyInput: ElementRef<HTMLInputElement>;
 
   public hashTable: HashTable;
 

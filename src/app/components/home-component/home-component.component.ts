@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponentComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit() {
     // this.validAnagram(121335, 132136);
     // this.countUniqValues([1, 2, 3, 3, 4, 4, 5]);

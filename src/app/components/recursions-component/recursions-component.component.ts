@@ -6,9 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recursions-component.component.scss']
 })
 export class RecursionsComponentComponent implements OnInit {
-
-  constructor() { }
-
   ngOnInit() {
     const res = this.capitalizeFirst(['car', 'taco', 'banana']);
     console.log(res);

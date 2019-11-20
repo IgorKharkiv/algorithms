@@ -7,8 +7,8 @@ import { MaxBinaryHeap, PriorityQueue } from '../../classes/index';
   styleUrls: ['./priority-queue.component.scss']
 })
 export class PriorityQueueComponent implements OnInit {
-  @ViewChild('priorityInput', null) priorityInput: ElementRef;
-  @ViewChild('valueInput', null) valueInput: ElementRef;
+  @ViewChild('priorityInput', null) priorityInput: ElementRef<HTMLInputElement>;
+  @ViewChild('valueInput', null) valueInput: ElementRef<HTMLInputElement>;
   public maxBinaryHeap: MaxBinaryHeap;
   public priorityQueue: PriorityQueue;
 

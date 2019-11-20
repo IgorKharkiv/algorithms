@@ -10,7 +10,6 @@ import { SinglyLinkedListNode } from '../../classes/singly-linked-list.class';
 export class StackComponent implements OnInit {
   public stack: Stack;
   public itemsArr: SinglyLinkedListNode[] = [];
-  constructor() { }
 
   ngOnInit() {
     this.stack = new Stack();
