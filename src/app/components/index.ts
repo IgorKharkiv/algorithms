@@ -9,4 +9,6 @@ export { BinarySearchTreeComponent } from './binary-search-tree/binary-search-tr
 export { PriorityQueueComponent } from './priority-queue/priority-queue.component';
 export { HashTableComponent } from './hash-table/hash-table.component';
 export { GraphComponent } from './graph/graph.component';
+export { DijkstrasAlgorithmComponent } from './dijkstras-algorithm/dijkstras-algorithm.component';
+
 
