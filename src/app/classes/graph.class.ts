@@ -1,3 +1,5 @@
+import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
+
 export class Graph {
   public adjacencyList: { [key: string]: string[] } = {};
   public addVertex(key: string): void {
@@ -29,6 +31,38 @@ export class Graph {
       });
       delete this.adjacencyList[vertex];
     }
+  }
+
+  public depthFirstSearchIterable(startingVertex: string): string[] {
+    const stack = [startingVertex];
+    const res = [];
+    const visitedVertexes = {};
+    while (stack.length) {
+      const ver = stack.pop();
+      if (!visitedVertexes[ver]) {
+        res.push(ver);
+        visitedVertexes[ver] = true;
+        this.adjacencyList[ver].forEach(v => stack.push(v));
+      }
+    }
+
+    return res;
+  }
+
+  public breadthFirstSearchIterable(startingVertex: string): string[] {
+    const stack = [startingVertex];
+    const res = [];
+    const visitedVertexes = {};
+    while (stack.length) {
+      const ver = stack.shift();
+      if (!visitedVertexes[ver]) {
+        res.push(ver);
+        visitedVertexes[ver] = true;
+        this.adjacencyList[ver].forEach(v => stack.push(v));
+      }
+    }
+
+    return res;
   }
 
   public depthFirstSearchRecursive(startingVertex: string): string[] {

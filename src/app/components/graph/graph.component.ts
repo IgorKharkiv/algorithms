@@ -48,4 +48,18 @@ export class GraphComponent implements OnInit {
     console.log(res);
     return res;
   }
+
+  public depthFirstSearchIterable(): string[] {
+    const ver = this.vertexAInput.nativeElement.value;
+    const res = this.graph.depthFirstSearchIterable(ver);
+    console.log(res);
+    return res;
+  }
+
+  public breadthFirstSearchIterable(): string[] {
+    const ver = this.vertexAInput.nativeElement.value;
+    const res = this.graph.breadthFirstSearchIterable(ver);
+    console.log(res);
+    return res;
+  }
 }
