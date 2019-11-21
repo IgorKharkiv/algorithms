@@ -7,3 +7,4 @@ export * from './max-binary-heap.class';
 export * from './priority-queue.class';
 export * from './hash-table.class';
 export * from './graph.class';
+export * from './weighted-graph.class';

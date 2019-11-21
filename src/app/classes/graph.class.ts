@@ -1,5 +1,3 @@
-import { RESOURCE_CACHE_PROVIDER } from '@angular/platform-browser-dynamic';
-
 export class Graph {
   public adjacencyList: { [key: string]: string[] } = {};
   public addVertex(key: string): void {

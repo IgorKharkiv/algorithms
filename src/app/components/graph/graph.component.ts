@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Graph } from '../../classes/';
+import { Graph, WeightedGraph } from '../../classes/';
 
 @Component({
   selector: 'app-graph',
@@ -11,9 +11,12 @@ export class GraphComponent implements OnInit {
   @ViewChild('vertexAInput', null) public vertexAInput: ElementRef<HTMLInputElement>;
   @ViewChild('vertexBInput', null) public vertexBInput: ElementRef<HTMLInputElement>;
   public graph: Graph;
+  public weightedGraph: WeightedGraph;
 
   ngOnInit() {
     this.graph = new Graph();
+    this.weightedGraph = new WeightedGraph();
+    console.log(this.weightedGraph);
   }
 
   public addVertex(): void {
