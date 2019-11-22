@@ -1,17 +1,17 @@
-export class PriorityNode {
-  value: any;
+export class PriorityNode<T> {
+  value: T;
   priority: number;
-  constructor(value: any, priority: number) {
+  constructor(value: T, priority: number) {
     this.value = value;
     this.priority = priority;
   }
 }
 
 export class PriorityQueue {
-  public values: PriorityNode[] = [];
+  public values: PriorityNode<any>[] = [];
 
-  public enqueue(val: any, priority: number): PriorityNode {
-    const node = new PriorityNode(val, priority);
+  public enqueue<T>(val: T, priority: number): PriorityNode<T> {
+    const node = new PriorityNode<T>(val, priority);
 
     this.values.push(node);
     let childIndex = this.values.length - 1;
@@ -30,8 +30,8 @@ export class PriorityQueue {
     return node;
   }
 
-  public dequeue(): void {
-    this.values.shift();
+  public dequeue<T>(): PriorityNode<T> {
+    const removedItem = this.values.shift();
     if (this.values.length < 2) { return; }
 
     this.values.unshift(this.values.pop());
@@ -41,20 +41,22 @@ export class PriorityQueue {
       const rightChildIndex = 2 * n + 2;
 
       let indexToSwapWith = null;
-      if (!this.values[rightChildIndex] || this.values[leftChildIndex].priority < this.values[rightChildIndex].priority) {
+      if (!this.values[rightChildIndex] || this.values[leftChildIndex].priority <= this.values[rightChildIndex].priority) {
         indexToSwapWith = leftChildIndex;
       } else {
         indexToSwapWith = rightChildIndex;
       }
 
       const currentItem = this.values[n];
-      if (this.values[indexToSwapWith] && currentItem.priority > this.values[indexToSwapWith].priority) {
+      if (this.values[indexToSwapWith] && currentItem.priority >= this.values[indexToSwapWith].priority) {
         [this.values[n], this.values[indexToSwapWith]] = [this.values[indexToSwapWith], this.values[n]];
         n = indexToSwapWith;
       } else {
         break;
       }
     }
+
+    return removedItem;
   }
 
   private getParentIndex(n: number): number {
